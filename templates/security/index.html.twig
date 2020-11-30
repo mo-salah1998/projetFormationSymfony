@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+    <!-- WRAPPER -->
+
+    <div id="wrapper">
+        <div class="vertical-align-wrap">
+            <div class="vertical-align-middle auth-main">
+                <div class="auth-box">
+                    <div class="top">
+                        <img src="http://www.wrraptheme.com/templates/lucid/hospital/assets/images/logo-white.svg" alt="Lucid">
+                    </div>
+                    <div class="card">
+                        <div class="header">
+                            <p class="lead">Connecter a votre compte </p>
+                        </div>
+                        <div class="body">
+                            <form novalidate method="POST" class="form-auth-small" >
+                                <div class="form-group">
+                                    <label for="signin-email" class="control-label sr-only">Email</label>
+                                    <input type="email" name="signin-email" class="form-control" id="signin-email" placeholder="Email"
+                                           value="{{ app.session.get(constant('App\\Controller\\SecurityController::Last_Email'))}} ">
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="signin-password" class="control-label sr-only"> Mot de passe </label>
+                                    <input type="password" name="signin-password" class="form-control" id="signin-password" value="" placeholder="Mot de passe">
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="fancy-checkbox element-left">
+                                        <input type="checkbox">
+                                        <span>Me rappeler </span>
+                                    </label>
+                                </div>
+                                <input type="hidden" name="csrf_token" value="{{ csrf_token('Login_form') }}">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block btn btn-toastr" value="Sign In">Connexion</button>
+                                <div class="bottom">
+                                    <span class="helper-text m-b-10"><i class="fa fa-lock"></i> <a href="page-forgot-password.html">Mot de pass oublié?</a></span>
+                                    <span>Vous n'avait pas un compte? <a href="#">Créer un compte </a></span>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

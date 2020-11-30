@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+     {% block stylesheets %}
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+        <meta name="description" content="Lucid Bootstrap 4.1.1 Admin Template">
+        <meta name="author" content="WrapTheme, design by: ThemeMakker.com">
+
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <!-- VENDOR CSS -->
+        <link rel="stylesheet" href="{{ asset('lucid/hospital/assets/vendor/bootstrap/css/bootstrap.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('lucid/hospital/assets/vendor/font-awesome/css/font-awesome.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('lucid/hospital/assets/vendor/toastr/toastr.min.css')}}">
+
+        <!-- MAIN CSS -->
+        <link rel="stylesheet" href="{{ asset('lucid/hospital/light/assets/css/main.css')}}">
+        <link rel="stylesheet" href="{{ asset('lucid/hospital/light/assets/css/color_skins.css')}}">
+     {% endblock %}
+
+
+{% block body %}
+<div class="theme-cyan">
+
+
+    {% for type, messages in app.flashes %}
+        {% for message in messages %}
+
+            <div class="btn btn-default btn-toastr" data-context="error" data-message={{ message }} data-position="top-right">
+                {{ message }}
+            </div>
+
+        {% endfor %}
+    {% endfor %}
+
+</div>
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="{{ asset('lucid/hospital/light/assets/bundles/libscripts.bundle.js')}} "></script>
+    <script src="{{ asset('lucid/hospital/light/assets/bundles/vendorscripts.bundle.js')}} "></script>
+
+    <script src="{{ asset('lucid/hospital/assets/vendor/toastr/toastr.js')}}"></script>
+
+    <script src="{{ asset('lucid/hospital/light/assets/bundles/mainscripts.bundle.js')}}"></script>
+
+    <script>
+        $(function() {
+            toastr.options.timeOut = "false";
+            toastr.options.closeButton = true;
+            toastr.options.positionClass = 'toast-bottom-right';
+            toastr['info']('Hi there, this is notification demo with HTML support. So, you can add HTML elements like <a href="javascript:void(0);">this link</a>');
+
+            $('.btn-toastr').on('click', function() {
+                $context = $(this).data('context');
+                $message = $(this).data('message');
+                $position = $(this).data('position');
+
+                if ($context === '') {
+                    $context = 'info';
+                }
+
+                if ($position === '') {
+                    $positionClass = 'toast-bottom-right';
+                } else {
+                    $positionClass = 'toast-' + $position;
+                }
+
+                toastr.remove();
+                toastr[$context]($message, '', {
+                    positionClass: $positionClass
+                });
+            });
+        });
+    </script>
+{% endblock %}
