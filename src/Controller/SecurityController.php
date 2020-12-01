@@ -21,7 +21,7 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/user/add", name="user",methods={"POST"})
+     * @Route("/AjouterUser", name="userAdd",methods={"POST"})
      * @param Request $request
      * @return Response
      */
@@ -32,16 +32,15 @@ class SecurityController extends AbstractController
         $firstName=$data['firstName'];
         $lastName=$data['lastName'];
         $email=$data['email'];
-        $nomcour=$data['nomcour'];
         $password=$data['password'];
 
 
 
-        if(empty($firstName)||empty($lastName)||empty($email)){
+        if(empty($firstName)||empty($lastName)||empty($email)||empty($password)){
             throw new NotFoundHttpException($message='parametres please');
         }
 
-        $this->repository->saveUser($firstName,$lastName,$email,$nomcour,$password) ;
+        $this->repository->saveUser($firstName,$lastName,$email,$password) ;
         return new Response($content=' User created ! ');
 
 

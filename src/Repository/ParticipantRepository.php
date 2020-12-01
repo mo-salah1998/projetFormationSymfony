@@ -27,14 +27,13 @@ class ParticipantRepository extends ServiceEntityRepository
     }
 
 
-    public function saveUser($firstName,$lastName,$email,$nomcour,$password){
+    public function saveUser($firstName,$lastName,$email,$password){
 
         $user = new Participant() ;
 
         $user->setNomP($firstName);
         $user->setPrenomP($lastName);
         $user->setEmail($email);
-        $user->setNomCours($nomcour);
         $plainepassword = $password ;
 
         $user->setPassword($this->passwordEncoder->encodePassword($user,$plainepassword));

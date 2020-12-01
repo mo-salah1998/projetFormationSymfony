@@ -33,10 +33,7 @@ class Participant implements UserInterface
      */
     private $email;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nomCours;
+
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -84,17 +81,9 @@ class Participant implements UserInterface
         return $this;
     }
 
-    public function getNomCours(): ?string
-    {
-        return $this->nomCours;
-    }
 
-    public function setNomCours(string $nomCours): self
-    {
-        $this->nomCours = $nomCours;
 
-        return $this;
-    }
+
 
     public function getPassword(): ?string
     {
