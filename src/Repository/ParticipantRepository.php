@@ -4,7 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Participant;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @method Participant|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,10 +16,37 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ParticipantRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+
+    private $manager ;
+    public $passwordEncoder ;
+    public function __construct(ManagerRegistry $registry,EntityManagerInterface $manager,UserPasswordEncoderInterface $passwordEncoder)
     {
         parent::__construct($registry, Participant::class);
+        $this->passwordEncoder=$passwordEncoder;
+        $this->manager = $manager;
     }
+
+
+    public function saveUser($firstName,$lastName,$email,$nomcour,$password){
+
+        $user = new Participant() ;
+
+        $user->setNomP($firstName);
+        $user->setPrenomP($lastName);
+        $user->setEmail($email);
+        $user->setNomCours($nomcour);
+        $plainepassword = $password ;
+
+        $user->setPassword($this->passwordEncoder->encodePassword($user,$plainepassword));
+
+
+
+
+        $this->manager-> persist($user);
+        $this->manager->flush();
+
+    }
+
 
     // /**
     //  * @return Participant[] Returns an array of Participant objects
