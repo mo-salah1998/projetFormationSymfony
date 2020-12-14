@@ -81,10 +81,6 @@ class Participant implements UserInterface
         return $this;
     }
 
-
-
-
-
     public function getPassword(): ?string
     {
         return $this->password;

@@ -38,9 +38,6 @@ class ParticipantRepository extends ServiceEntityRepository
 
         $user->setPassword($this->passwordEncoder->encodePassword($user,$plainepassword));
 
-
-
-
         $this->manager-> persist($user);
         $this->manager->flush();
 

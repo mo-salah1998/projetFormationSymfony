@@ -23,7 +23,6 @@ class LoginFormAuthenticator extends AbstractAuthenticator
     private $participant ;
     private $urlGenerator;
 
-
     public function __construct(ParticipantRepository $participant,UrlGeneratorInterface $urlGenerator)
     {
         $this->participant = $participant;

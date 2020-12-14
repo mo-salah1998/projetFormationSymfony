@@ -21,27 +21,30 @@ class SecurityController extends AbstractController
     }
 
     /**
-     * @Route("/AjouterUser", name="userAdd",methods={"POST"})
+     * @Route("/AjouterUser", name="userAdd",methods={"GET","POST"})
      * @param Request $request
      * @return Response
+     * @throws NotFoundHttpException
      */
     public function Add(Request $request): Response
     {
-        // recuperation des donner json ;
-        $data=json_decode($request->getContent(),$assoc=true);
-        $firstName=$data['firstName'];
-        $lastName=$data['lastName'];
-        $email=$data['email'];
-        $password=$data['password'];
+        // recuperation des donner
+        #$data=$request->getContent();
+        #dd($data);
+        $firstName=$_POST["lastName"];
+        #dd($firstName);
+        $lastName=$_POST["firstName"];
+        $email=$_POST["email"];
+        $password=$_POST["password"];
 
 
 
         if(empty($firstName)||empty($lastName)||empty($email)||empty($password)){
-            throw new NotFoundHttpException($message='parametres please');
+            throw new NotFoundHttpException($message='parameter please');
         }
 
         $this->repository->saveUser($firstName,$lastName,$email,$password) ;
-        return new Response($content=' User created ! ');
+        return $this->redirectToRoute('app_login');
 
 
     }
@@ -51,10 +54,11 @@ class SecurityController extends AbstractController
      */
     public function register(): Response
     {
-        $form = $this->createForm(UserRegistrationFormType::class);
+        #$form = $this->createForm(UserRegistrationFormType::class);
+
         return $this->render('security/register.html.twig', [
             'controller_name' => 'SecurityController',
-            'registrationForm'=> $form->createView()
+            //'registrationForm'=> $form->createView()
         ]);
     }
 
