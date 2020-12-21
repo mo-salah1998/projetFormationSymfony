@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="@localhost" uuid="264c437f-b78a-4038-bd44-9b48b0a22e82">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3307</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="http://localhost:81/phpmyadmin/db_structure.php?server=1&amp;db=projectdb" uuid="eec9fc2d-6a82-4519-8a13-10a2cd626e61">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <configured-by-url>true</configured-by-url>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>http://localhost:81/phpmyadmin/db_structure.php?server=1&amp;db=projectdb</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+  </component>
+</project>
