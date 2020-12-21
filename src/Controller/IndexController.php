@@ -85,11 +85,11 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="matiere1_delete", methods={"DELETE"})
+     * @Route("/delete/{id}", name="matiere1_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Matiere $matiere): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$matiere->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $matiere->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($matiere);
             $entityManager->flush();
@@ -97,7 +97,6 @@ class IndexController extends AbstractController
 
         return $this->redirectToRoute('app_index');
     }
-
 
 
 }

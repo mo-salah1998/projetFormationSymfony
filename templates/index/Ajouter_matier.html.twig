@@ -3,13 +3,17 @@
 {% block title %} Ajouter Matier {% endblock %}
 
 
+
 {% block body %}
+
     <body class="theme-cyan">
 
     <!-- Page Loader -->
     <div class="page-loader-wrapper">
         <div class="loader">
-            <div class="m-t-30"><img src="http://www.wrraptheme.com/templates/lucid/hospital/assets/images/logo-icon.svg" width="48" height="48" alt="Lucid"></div>
+            <div class="m-t-30"><img
+                        src="http://www.wrraptheme.com/templates/lucid/hospital/assets/images/logo-icon.svg" width="48"
+                        height="48" alt="Lucid"></div>
             <p>Please wait...</p>
         </div>
     </div>
@@ -18,6 +22,9 @@
 <div id="wrapper">
 
     {{ include('index/navbar.html.twig') }}
+
+    {{ include('index/sidebare.html.twig') }}
+
 
     <div class="row clearfix">
         <div class="col-md-12">
@@ -43,7 +50,8 @@
                             <label>Checkbox</label>
                             <br/>
                             <label class="fancy-checkbox">
-                                <input type="checkbox" name="checkbox" required data-parsley-errors-container="#error-checkbox">
+                                <input type="checkbox" name="checkbox" required
+                                       data-parsley-errors-container="#error-checkbox">
                                 <span>Option 1</span>
                             </label>
                             <label class="fancy-checkbox">
@@ -58,9 +66,10 @@
                         </div>
                         <div class="form-group">
                             <label>Radio Button</label>
-                            <br />
+                            <br/>
                             <label class="fancy-radio">
-                                <input type="radio" name="gender" value="male" required data-parsley-errors-container="#error-radio">
+                                <input type="radio" name="gender" value="male" required
+                                       data-parsley-errors-container="#error-radio">
                                 <span><i></i>Male</span>
                             </label>
                             <label class="fancy-radio">
@@ -72,7 +81,9 @@
                         <div class="form-group">
                             <label for="food">Multiselect</label>
                             <br/>
-                            <select id="food" name="food[]" class="multiselect multiselect-custom" multiple="multiple" data-parsley-required data-parsley-trigger-after-failure="change" data-parsley-errors-container="#error-multiselect">
+                            <select id="food" name="food[]" class="multiselect multiselect-custom" multiple="multiple"
+                                    data-parsley-required data-parsley-trigger-after-failure="change"
+                                    data-parsley-errors-container="#error-multiselect">
                                 <option value="cheese">Cheese</option>
                                 <option value="tomatoes">Tomatoes</option>
                                 <option value="mozarella">Mozzarella</option>
@@ -97,11 +108,13 @@
                     <form id="advanced-form" data-parsley-validate novalidate>
                         <div class="form-group">
                             <label for="text-input1">Min. 8 Characters</label>
-                            <input type="text" id="text-input1" class="form-control" required data-parsley-minlength="8">
+                            <input type="text" id="text-input1" class="form-control" required
+                                   data-parsley-minlength="8">
                         </div>
                         <div class="form-group">
                             <label for="text-input2">Between 5-10 Characters</label>
-                            <input type="text" id="text-input2" class="form-control" required data-parsley-length="[5,10]">
+                            <input type="text" id="text-input2" class="form-control" required
+                                   data-parsley-length="[5,10]">
                         </div>
                         <div class="form-group">
                             <label for="text-input3">Min. Number ( >= 5 )</label>
@@ -109,13 +122,15 @@
                         </div>
                         <div class="form-group">
                             <label for="text-input4">Between 20-30</label>
-                            <input type="text" id="text-input4" class="form-control" required data-parsley-range="[20,30]">
+                            <input type="text" id="text-input4" class="form-control" required
+                                   data-parsley-range="[20,30]">
                         </div>
                         <div class="form-group">
                             <label>Select Min. 2 Options</label>
-                            <br />
+                            <br/>
                             <label class="control-inline fancy-checkbox">
-                                <input type="checkbox" name="checkbox2" required data-parsley-mincheck="2" data-parsley-errors-container="#error-checkbox2">
+                                <input type="checkbox" name="checkbox2" required data-parsley-mincheck="2"
+                                       data-parsley-errors-container="#error-checkbox2">
                                 <span>Option 1</span>
                             </label>
                             <label class="control-inline fancy-checkbox">
@@ -130,9 +145,10 @@
                         </div>
                         <div class="form-group">
                             <label>Select Between 1-2 Options</label>
-                            <br />
+                            <br/>
                             <label class="control-inline fancy-checkbox">
-                                <input type="checkbox" name="checkbox3" required data-parsley-check="[1,2]" data-parsley-errors-container="#error-checkbox3">
+                                <input type="checkbox" name="checkbox3" required data-parsley-check="[1,2]"
+                                       data-parsley-errors-container="#error-checkbox3">
                                 <span>Option 1</span>
                             </label>
                             <label class="control-inline fancy-checkbox">
@@ -152,4 +168,4 @@
             </div>
         </div>
     </div>
-{%  endblock %}
+{% endblock %}
