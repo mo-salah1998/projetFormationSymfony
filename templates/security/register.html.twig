@@ -23,19 +23,19 @@
                             <form action ="/AjouterUser" method="POST"  class="form-auth-small">
                                 <div class="form-group">
                                     <label for="signup-email" class="control-label sr-only">Nom</label>
-                                    <input name="lastName" type="text" class="form-control" id="lastName" placeholder="Votre Nom">
+                                    <input name="lastName" required minlength="3" type="text" class="form-control" id="lastName" placeholder="Votre Nom">
                                 </div>
                                 <div class="form-group">
                                     <label for="signup-email" class="control-label sr-only">Prénom</label>
-                                    <input name="firstName" type="text" class="form-control" id="firstName" placeholder="Votre Prénom">
+                                    <input name="firstName" type="text" required minlength="3" class="form-control" id="firstName" placeholder="Votre Prénom">
                                 </div>
                                 <div class="form-group">
                                     <label for="signup-email" class="control-label sr-only">Email</label>
-                                    <input name="email" type="email" class="form-control" id="email" placeholder="Votre email">
+                                    <input name="email" type="email"  class="form-control" id="email" placeholder="Votre email">
                                 </div>
                                 <div class="form-group">
                                     <label for="signup-password" class="control-label sr-only">Password</label>
-                                    <input name="password" type="password" class="form-control" id="password" placeholder="Mot de Passe">
+                                    <input name="password" required minlength="3" type="password" class="form-control" id="password" placeholder="Mot de Passe">
                                 </div>
 
                                 <button type="submit" value="Submit" class="btn btn-primary btn-lg btn-block">REGISTER</button>

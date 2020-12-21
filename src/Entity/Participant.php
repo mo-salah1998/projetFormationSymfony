@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
@@ -20,16 +21,20 @@ class Participant implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="ce champ ne peut pas etre vide ")
      */
     private $nomP;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="ce champ ne peut pas etre vide ")
      */
     private $prenomP;
 
     /**
      * @ORM\Column(type="string", length=255,unique=true)
+     * @Assert\NotBlank(message="ce champ ne peut pas etre vide ")
+     * @Assert\Email()
      */
     private $email;
 
@@ -37,6 +42,7 @@ class Participant implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(min="3", max="30")
      */
     private $password;
 

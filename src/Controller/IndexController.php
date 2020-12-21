@@ -32,6 +32,7 @@ class IndexController extends AbstractController
 
     /**
      * @Route("/new", name="matiere_new", methods={"GET","POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function new(Request $request): Response
     {
@@ -44,27 +45,27 @@ class IndexController extends AbstractController
             $entityManager->persist($matiere);
             $entityManager->flush();
 
-            return $this->redirectToRoute('matiere_index');
+            return $this->redirectToRoute('app_index');
         }
 
-        return $this->render('matiere/new.html.twig', [
+        return $this->render('index/new.html.twig', [
             'matiere' => $matiere,
             'form' => $form->createView(),
         ]);
     }
 
     /**
-     * @Route("/{id}", name="matiere_show", methods={"GET"})
+     * @Route("/{id}", name="index_matiere_show", methods={"GET"})
      */
     public function show(Matiere $matiere): Response
     {
-        return $this->render('matiere/show.html.twig', [
+        return $this->render('index/show.html.twig', [
             'matiere' => $matiere,
         ]);
     }
 
     /**
-     * @Route("/{id}/edit", name="matiere_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="index_matiere_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Matiere $matiere): Response
     {
@@ -74,10 +75,10 @@ class IndexController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('matiere_index');
+            return $this->redirectToRoute('app_index');
         }
 
-        return $this->render('matiere/edit.html.twig', [
+        return $this->render('index/edit.html.twig', [
             'matiere' => $matiere,
             'form' => $form->createView(),
         ]);

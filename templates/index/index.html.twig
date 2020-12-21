@@ -414,7 +414,9 @@
                             <div class="body">
                                 <h2>Les Matiéres </h2>
                                 <p class="float-md-right">
-                                    <span class="btn btn-outline-primary"> Ajouter Matiére</span>
+
+                                        <button class="btn btn-outline-primary" >  <a href="{{ path('matiere_new') }}" > Ajouter Matiére     </a></button>
+
 
                                 </p>
                                 <div class="table-responsive table_middel">
@@ -454,12 +456,15 @@
                                                 <td>{{ matiere.prixM }}</td>
                                                 <td>{{ matiere.imgSrc }}</td>
                                                 <td>
-                                                    <span class="btn btn-outline-success icon-eye"></span>
-                                                    <a href="{{ path('matiere_show', {'id': matiere.id}) }}"></a>
+                                                    <a href="{{ path('index_matiere_show', {'id': matiere.id}) }}">
+                                                    <button class="btn btn-outline-success icon-eye"></button>
+                                                    </a>
                                                 </td>
                                                 <td>
-                                                    <span class="btn btn-outline-warning fa fa-edit">
-                                                    <a href="{{ path('matiere_edit', {'id': matiere.id}) }}"></a></td>
+                                                    <a href="{{ path('index_matiere_edit', {'id': matiere.id}) }}">
+                                                        <button class="btn btn-outline-warning fa fa-edit"></button>
+                                                    </a>
+                                                </td>
 
                                                 <td>
                                                     <form method="post" action="{{ path('matiere1_delete', {'id': matiere.id}) }}"

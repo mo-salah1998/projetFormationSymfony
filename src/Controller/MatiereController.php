@@ -25,28 +25,7 @@ class MatiereController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="matiere_new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $matiere = new Matiere();
-        $form = $this->createForm(MatiereType::class, $matiere);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($matiere);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('matiere_index');
-        }
-
-        return $this->render('matiere/new.html.twig', [
-            'matiere' => $matiere,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="matiere_show", methods={"GET"})
