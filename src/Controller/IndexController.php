@@ -41,6 +41,25 @@ class IndexController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //requperation des images transmise
+
+            $image = $form->get('imgSrc')->getData();
+
+            $fichier = $image->getFilename(). '.' . $image->guessExtension();
+
+
+
+            $image->move(
+                $this->getParameter('images_directory'),
+                $fichier
+
+            );
+
+            $matiere->setImgSrc($fichier);
+
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($matiere);
             $entityManager->flush();
@@ -56,6 +75,8 @@ class IndexController extends AbstractController
 
     /**
      * @Route("/{id}", name="index_matiere_show", methods={"GET"})
+     * @param Matiere $matiere
+     * @return Response
      */
     public function show(Matiere $matiere): Response
     {
@@ -73,6 +94,23 @@ class IndexController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //requperation des images transmise
+
+            $image = $form->get('imgSrc')->getData();
+
+            $fichier = $image->getFilename(). '.' . $image->guessExtension();
+
+
+
+            $image->move(
+                $this->getParameter('images_directory'),
+                $fichier
+
+            );
+
+            $matiere->setImgSrc($fichier);
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('app_index');
@@ -86,6 +124,9 @@ class IndexController extends AbstractController
 
     /**
      * @Route("/delete/{id}", name="matiere1_delete", methods={"DELETE"})
+     * @param Request $request
+     * @param Matiere $matiere
+     * @return Response
      */
     public function delete(Request $request, Matiere $matiere): Response
     {
@@ -97,6 +138,8 @@ class IndexController extends AbstractController
 
         return $this->redirectToRoute('app_index');
     }
+
+
 
 
 }
