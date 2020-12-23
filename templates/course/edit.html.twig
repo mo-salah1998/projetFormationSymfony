@@ -69,45 +69,12 @@
                 <div class="card">
 
                     <div class="body">
-                        <h2>Les Matiéres </h2>
-                        <p class="float-md-right">
-                        <h1>Cours index</h1>
+                        <h2>Edit Course </h2>
 
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>NomC</th>
-                                <th>PrixC</th>
-                                <th>ImgSrc</th>
-                                <th>actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for cour in cours %}
-                                <tr>
-                                    <td>{{ cour.id }}</td>
-                                    <td>{{ cour.nomC }}</td>
-                                    <td>{{ cour.prixC }}</td>
-                                    <td>{{ cour.imgSrc }}</td>
-                                    <td>
-                                        <a href="{{ path('cours_show', {'id': cour.id}) }}">show</a>
-                                        <a href="{{ path('cours_edit', {'id': cour.id}) }}">edit</a>
-                                    </td>
-                                </tr>
-                            {% else %}
-                                <tr>
-                                    <td colspan="5">no records found</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
 
-                        <a href="{{ path('cours_new') }}">Create new</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
+                        {{ include('course/_form.html.twig', {'button_label': 'Update'}) }}
+
+                        <a href="{{ path('course_index') }}">back to list</a>
+
+                        {{ include('course/_delete_form.html.twig') }}
+                        {% endblock %}

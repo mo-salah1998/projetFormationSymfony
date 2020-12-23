@@ -42,9 +42,15 @@ class Matiere
      */
     private $courses;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Course::class, mappedBy="matiere")
+     */
+    private $test;
+
     public function __construct()
     {
         $this->courses = new ArrayCollection();
+        $this->test = new ArrayCollection();
     }
 
 
@@ -126,6 +132,36 @@ class Matiere
             // set the owning side to null (unless already changed)
             if ($course->getMatiere() === $this) {
                 $course->setMatiere(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Course[]
+     */
+    public function getTest(): Collection
+    {
+        return $this->test;
+    }
+
+    public function addTest(Course $test): self
+    {
+        if (!$this->test->contains($test)) {
+            $this->test[] = $test;
+            $test->setMatiere($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTest(Course $test): self
+    {
+        if ($this->test->removeElement($test)) {
+            // set the owning side to null (unless already changed)
+            if ($test->getMatiere() === $this) {
+                $test->setMatiere(null);
             }
         }
 

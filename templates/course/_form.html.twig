@@ -1,0 +1,11 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+
+    {% if app.request.attributes.get('_route')=='course_edit' %}
+
+        <div>
+            <img src="{{ asset('/uploads/'~ course.imgSrc) }}" alt="Image" width="300">
+        </div>
+    {% endif %}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
