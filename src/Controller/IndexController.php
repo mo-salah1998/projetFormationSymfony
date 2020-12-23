@@ -93,21 +93,37 @@ class IndexController extends AbstractController
         $form = $this->createForm(MatiereType::class, $matiere);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        $imageini = $matiere->getImgSrc();
+        #dd($imageini);
 
+        # dd($this->getParameter('images_directory')."/". $image);
+
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // TODO (le supprision de l'image en cas d'update )
             //requperation des images transmise
 
             $image = $form->get('imgSrc')->getData();
 
+
+
             $fichier = $image->getFilename(). '.' . $image->guessExtension();
 
+            #dd($fichier . "///" . $imageini);
 
+            if ($imageini != $fichier){
+               // dd($this->getParameter('images_directory')."/". $imageini);
+                unlink( $this->getParameter('images_directory')."/". $imageini);
 
-            $image->move(
-                $this->getParameter('images_directory'),
-                $fichier
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
 
-            );
+                );
+
+            }
+
 
             $matiere->setImgSrc($fichier);
 
@@ -132,6 +148,14 @@ class IndexController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete' . $matiere->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            //recuperation de l'image a supprimer
+            $image = $matiere->getImgSrc();
+
+            # dd($this->getParameter('images_directory')."/". $image);
+
+            unlink( $this->getParameter('images_directory')."/". $image);
+
+
             $entityManager->remove($matiere);
             $entityManager->flush();
         }

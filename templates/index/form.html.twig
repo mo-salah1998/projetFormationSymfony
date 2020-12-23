@@ -2,7 +2,7 @@
 
 {% block body %}
 
-{{ form_start(form) }}
+    {{ form_start(form) }}
 
     <div class="form-control">
 
@@ -17,7 +17,6 @@
         </div>
 
 
-
         <i class=""></i>
         {{ form_label(form.prixM, 'Prix') }}
         {{ form_widget(form.prixM) }}
@@ -27,7 +26,6 @@
         <div class="form-error">
             {{ form_errors(form.prixM) }}
         </div>
-
 
 
         <i class=""></i>
@@ -40,10 +38,16 @@
             {{ form_errors(form.imgSrc) }}
         </div>
 
+        {% if app.request.attributes.get('_route')=='index_matiere_edit' %}
+
+            <div>
+                <img src="{{ asset('/uploads/'~ matiere.imgSrc) }}" alt="Image" width="300">
+            </div>
+        {% endif %}
         <button class="btn btn-outline-success">{{ button_label|default('Save') }}</button>
     </div>
 
-{{ form_end(form) }}
+    {{ form_end(form) }}
 
 {% endblock %}
 
