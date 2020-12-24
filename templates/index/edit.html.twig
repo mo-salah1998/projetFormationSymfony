@@ -62,14 +62,18 @@
 
             <div class="col-lg-12">
                 <div class="card">
+                    <div class="body">
+                        <h2>Edit Matiere</h2>
 
-                    <h2>Edit Matiere</h2>
+                        {{ include('index/form.html.twig', {'button_label': 'Update'}) }}
+                        <br>
 
-                    {{ include('index/form.html.twig', {'button_label': 'Update'}) }}
+                        <a href="{{ path('app_index') }}">
+                            <button class="btn btn-outline-info">back to list </button>
+                        </a>
 
-                    <a href="{{ path('app_index') }}">back to list</a>
-
-                    {{ include('index/delete_form.html.twig') }}
+                        {{ include('index/delete_form.html.twig') }}
+                    </div>
                 </div>
             </div>
         </div>

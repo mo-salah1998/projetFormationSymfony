@@ -46,7 +46,7 @@ class IndexController extends AbstractController
 
             $image = $form->get('imgSrc')->getData();
 
-            $fichier = $image->getFilename(). '.' . $image->guessExtension();
+            $fichier = md5(uniqid()) . '.' . $image->guessExtension();
 
 
 
@@ -108,7 +108,7 @@ class IndexController extends AbstractController
 
 
 
-            $fichier = $image->getFilename(). '.' . $image->guessExtension();
+            $fichier = md5(uniqid()) . '.' . $image->guessExtension();
 
             #dd($fichier . "///" . $imageini);
 
@@ -148,12 +148,13 @@ class IndexController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete' . $matiere->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            //TODO
             //recuperation de l'image a supprimer
-            $image = $matiere->getImgSrc();
+            // $image = $matiere->getImgSrc();
 
             # dd($this->getParameter('images_directory')."/". $image);
 
-            unlink( $this->getParameter('images_directory')."/". $image);
+          //  unlink( $this->getParameter('images_directory')."/". $image);
 
 
             $entityManager->remove($matiere);
