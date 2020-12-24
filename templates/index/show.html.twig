@@ -64,9 +64,9 @@
 
             <div class="col-lg-12">
                 <div class="card">
-
-                    <h2>Matiere</h2>
-
+                    <div class="header">
+                        <h2> Matiere</h2>
+                    </div>
                     <table class="table">
                         <tbody>
                         <tr>
@@ -74,15 +74,15 @@
                             <td>{{ matiere.id }}</td>
                         </tr>
                         <tr>
-                            <th>NomM</th>
+                            <th> Nom Matiere </th>
                             <td>{{ matiere.nomM }}</td>
                         </tr>
                         <tr>
-                            <th>PrixM</th>
+                            <th> Prix </th>
                             <td>{{ matiere.prixM }}</td>
                         </tr>
                         <tr>
-                            <th>ImgSrc</th>
+                            <th> Image </th>
 
                             <td>
                                 <img src="{{ asset('/uploads/'~ matiere.imgSrc) }}" alt="Image" width="300">
@@ -91,14 +91,32 @@
                         </tbody>
                     </table>
 
-                    <a href="{{ path('app_index') }}">back to list</a>
+                    <div class="btn-block">
+                        <a href="{{ path('app_index') }}">
+                            <button class="btn">back to list</button>
+                        </a>
 
-                    <a href="{{ path('index_matiere_edit', {'id': matiere.id}) }}">edit</a>
+                        <a href="{{ path('index_matiere_edit', {'id': matiere.id}) }}">
+                            <button class="btn"> edit </button>
+                        </a>
+                        {{ include('index/delete_form.html.twig') }}
+                    </div>
+                </div>
 
-                    {{ include('index/delete_form.html.twig') }}
+
+                <div class="card">
+                    <div class="header">
+                        <h2>Les Cours de la matiere {{ matiere.nomM }}</h2>
+                    </div>
+                    <div class="body">
+                        <ul class="list-group">
+                            {% for test in (matiere.getTest()) %}
+                                <li class="list-group-item">{{ test.getNom() }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
