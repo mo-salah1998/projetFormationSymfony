@@ -12,13 +12,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/index")
+ * @Route("/admin/index")
  */
 class IndexController extends AbstractController
 {
     /**
      * @Route("/", name="app_index")
-     * @IsGranted("ROLE_USER")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(MatiereRepository $matiereRepository): Response
     {

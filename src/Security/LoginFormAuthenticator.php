@@ -62,7 +62,14 @@ class LoginFormAuthenticator extends AbstractAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        return new RedirectResponse($this->urlGenerator->generate('app_index'));
+         $user = $this->participant->findOneByEmail($request->request->get('signin-email'));
+         $role = $user->getRoles();
+         #dd($role);
+         if ($role[0] == "ROLE_USER"){
+             return new RedirectResponse($this->urlGenerator->generate('user_interface'));
+         }else {
+             return new RedirectResponse($this->urlGenerator->generate('app_index'));
+         }
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response

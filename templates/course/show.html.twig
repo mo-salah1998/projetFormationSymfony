@@ -95,7 +95,9 @@
                             </tbody>
                         </table>
 
-                        <a href="{{ path('course_index') }}">back to list</a>
+                        <a href="{{ path('course_index') }}">
+                            <button class="btn btn-outline-info">back to list</button>
+                        </a>
 
                         <a href="{{ path('course_edit', {'id': course.id}) }}">edit</a>
 

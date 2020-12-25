@@ -44,6 +44,7 @@ class SecurityController extends AbstractController
         }
 
         $this->repository->saveUser($firstName,$lastName,$email,$password) ;
+
         return $this->redirectToRoute('app_login');
 
 
