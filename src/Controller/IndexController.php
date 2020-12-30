@@ -112,7 +112,7 @@ class IndexController extends AbstractController
 
             #dd($fichier . "///" . $imageini);
 
-            if ($imageini != $fichier){
+            //if ($imageini != $fichier){
                // dd($this->getParameter('images_directory')."/". $imageini);
                 unlink( $this->getParameter('images_directory')."/". $imageini);
 
@@ -122,7 +122,7 @@ class IndexController extends AbstractController
 
                 );
 
-            }
+         //   }
 
 
             $matiere->setImgSrc($fichier);
