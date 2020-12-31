@@ -3,9 +3,12 @@
 namespace App\Controller;
 
 use App\Repository\MatiereRepository;
+use App\Service\panierService;
+use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -26,20 +29,34 @@ class UserInterfaceController extends AbstractController
     }
 
     /**
-     * @Route ("/panier/add/{id}" , name="cart_add")
+     * @Route ("/panier/add/{id}" , name="panier_add")
      */
-    public function add($id, Request $request)
+    public function add($id,panierService $panierService)
     {
-
-        $session = $request->getSession();
-
-        $panier = $session->get('panier', []);
-
-        $panier[$id] = 1;
-
-        $session->set('panier', $panier);
-
-        dd($session->get('panier'));
+        $panierService->add($id);
+        return $this->redirectToRoute("user_panier");
 
     }
+
+    /**
+     * @Route ("/panier" , name="panier")
+     */
+    public function panier(panierService $panierService)
+    {
+        return $this->render('user_interface/panier.html.twig',[
+            'items' => $panierService->getFullPanier(),
+            'total' => $panierService->getTotal(),
+        ]);
+    }
+
+    /**
+     * @Route ("/panier/remove/{id}" , name="panier_remove")
+     */
+    public function remove( $id,panierService $panierService)
+    {
+        $panierService->remove($id);
+        return $this->redirectToRoute("user_panier");
+    }
+
+
 }
