@@ -35,6 +35,17 @@ class CoursController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            //on recupère les images transmisse
+            $images = $form->get('imgCours')->getData();
+            $fichier = md5(uniqid()) . '.' . $images->guessExtension();
+            $images->move(
+                $this->getParameter('images_directory'),
+                $fichier
+            );
+            $cour ->setImgSrc($fichier);
+
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($cour);
             $entityManager->flush();
@@ -67,6 +78,18 @@ class CoursController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if(($form->get('imgCourse')->getData())!=null){
+                //on recupère les images transmisse
+                $images = $form->get('imgCours')->getData();
+                $fichier = md5(uniqid()) . '.' . $images->guessExtension();
+                $images->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+                $cour ->setImgSrc($fichier);
+            }
+
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('cours_index');

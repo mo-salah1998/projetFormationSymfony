@@ -43,7 +43,6 @@ class CourseController extends AbstractController
             $fichier = md5(uniqid()) . '.' . $image->guessExtension();
 
 
-
             $image->move(
                 $this->getParameter('images_directory'),
                 $fichier);
@@ -83,23 +82,18 @@ class CourseController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if (($form->get('imgSrc')->getData()) != null) {
+                //requperation des images transmise
 
-            //requperation des images transmise
+                $image = $form->get('imgSrc')->getData();
 
-            $image = $form->get('imgSrc')->getData();
-
-            $fichier = $image->getFilename(). '.' . $image->guessExtension();
-
-
-
-            $image->move(
-                $this->getParameter('images_directory'),
-                $fichier
-
-            );
-
-            $course->setImgSrc($fichier);
-
+                $fichier = md5(uniqid()) . '.' . $image->guessExtension();
+                $image->move(
+                    $this->getParameter('images_directory'),
+                    $fichier
+                );
+                $course->setImgSrc($fichier);
+            }
 
             $this->getDoctrine()->getManager()->flush();
 
@@ -117,7 +111,7 @@ class CourseController extends AbstractController
      */
     public function delete(Request $request, Course $course): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$course->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $course->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($course);
             $entityManager->flush();

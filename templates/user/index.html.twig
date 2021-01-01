@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}menu{% endblock %}
+{% block title %} participant {% endblock %}
 
 
 {% block body %}
@@ -69,59 +69,38 @@
                 <div class="card">
 
                     <div class="body">
-                        <h2>Course index</h2>
-                        <p class="float-md-right">
-                           <a href="{{ path('course_new') }}">
-                            <button class="btn btn-outline-primary"> Ajouter cours</button>
-                            </a>
-                        </p>
+                        <h2>All Users </h2>
+
                         <div class="table-responsive table_middel">
                             <table class="table m-b-0">
                                 <thead class="thead-dark">
                                 <tr>
                                     <th></th>
-                                    <th>Nom Cours</th>
-                                    <th>Matiere </th>
-                                    <th>Prix </th>
+                                    <th>Nom</th>
+                                    <th>Prenom</th>
+                                    <th>Email</th>
+                                    <th>Role</th>
 
-                                    <th>Afiicher</th>
-                                    <th>Modifier</th>
-                                    <th>Supprimer</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {% for course in courses %}
+                                {% for user in users %}
                                     <tr>
                                         <td></td>
 
-                                        <td>{{ course.nom }}</td>
+                                        <td>{{ user. nomP }}</td>
 
-                                        <td>{{ course.matiere.getnomM()}}</td>
+                                        <td>{{ user.prenomP }}</td>
+
+                                        <td>{{ user.email }}</td>
 
 
 
-                                        <td>{{ course.prix }}</td>
 
                                         <td>
-                                            <a href="{{ path('course_show', {'id': course.id}) }}">
-                                                <button class="btn btn-outline-success icon-eye"></button>
-                                            </a>
+
                                         </td>
-                                        <td>
-                                            <a href="{{ path('course_edit', {'id': course.id}) }}">
-                                                <button class="btn btn-outline-warning fa fa-edit"></button>
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <form method="post"
-                                                  action="{{ path('course_delete', {'id': course.id}) }}"
-                                                  onsubmit="return confirm('Are you sure you want to delete this item?');">
-                                                <input type="hidden" name="_method" value="DELETE">
-                                                <input type="hidden" name="_token"
-                                                       value="{{ csrf_token('delete' ~ course.id) }}">
-                                                <button class="btn btn-outline-danger fa fa-trash-o"></button>
-                                            </form>
-                                        </td>
+
 
                                     </tr>
                                 {% else %}

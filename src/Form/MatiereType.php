@@ -17,10 +17,11 @@ class MatiereType extends AbstractType
             ->add('nomM')
             ->add('prixM')
             ->add('imgSrc',FileType::class,[
-                'label'=> true,
+                'label'=> false,
                 'multiple'=> false,
                 'required' => false,
-                'data_class' => null
+                'mapped'=> false,
+
 
 
             ]);

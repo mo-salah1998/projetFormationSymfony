@@ -93,40 +93,18 @@ class IndexController extends AbstractController
         $form = $this->createForm(MatiereType::class, $matiere);
         $form->handleRequest($request);
 
-        $imageini = $matiere->getImgSrc();
-        #dd($imageini);
-
-        # dd($this->getParameter('images_directory')."/". $image);
-
-
-
         if ($form->isSubmitted() && $form->isValid()) {
-            // TODO (le supprision de l'image en cas d'update )
-            //requperation des images transmise
-
-            $image = $form->get('imgSrc')->getData();
-
-
-
-            $fichier = md5(uniqid()) . '.' . $image->guessExtension();
-
-            #dd($fichier . "///" . $imageini);
-
-            //if ($imageini != $fichier){
-               // dd($this->getParameter('images_directory')."/". $imageini);
-                unlink( $this->getParameter('images_directory')."/". $imageini);
-
-                $image->move(
+           // dd($images = $form->get('imgSrc')->getData());
+            if(($form->get('imgSrc')->getData())!=null){
+                //on recupère les images transmisse
+                $images = $form->get('imgSrc')->getData();
+                $fichier = md5(uniqid()) . '.' . $images->guessExtension();
+                $images->move(
                     $this->getParameter('images_directory'),
                     $fichier
-
                 );
-
-         //   }
-
-
-            $matiere->setImgSrc($fichier);
-
+                $matiere ->setImgSrc($fichier);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('app_index');
@@ -137,6 +115,9 @@ class IndexController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+
 
     /**
      * @Route("/delete/{id}", name="matiere1_delete", methods={"DELETE"})
@@ -154,7 +135,7 @@ class IndexController extends AbstractController
 
             # dd($this->getParameter('images_directory')."/". $image);
 
-          //  unlink( $this->getParameter('images_directory')."/". $image);
+           //  unlink( $this->getParameter('images_directory')."/". $image);
 
 
             $entityManager->remove($matiere);

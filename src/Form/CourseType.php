@@ -32,7 +32,9 @@ class CourseType extends AbstractType
                 'label'=> false,
                 'multiple'=> false,
                 'required' => false,
-                'data_class' => null
+                'data_class' => null,
+                'mapped'=> false,
+
             ])
 
             ;
