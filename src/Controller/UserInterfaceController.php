@@ -2,31 +2,39 @@
 
 namespace App\Controller;
 
+use App\Repository\CommandeRepository;
 use App\Repository\MatiereRepository;
+use App\Repository\ParticipantRepository;
 use App\Service\panierService;
 use Psr\Container\ContainerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 
 /**
  * @Route("/user", name="user_")
+ * @IsGranted("ROLE_USER")
  */
 class UserInterfaceController extends AbstractController
 {
     /**
      * @Route("/interface", name="interface")
      */
-    public function index(MatiereRepository $matiereRepository): Response
+    public function index(MatiereRepository $matiereRepository,ParticipantRepository $participantRepository,Session $session): Response
     {
+        $user = $participantRepository->findOneByEmail($session->get('app_login_from_last_email'));
+       // dd($user->getUser());
         return $this->render('user_interface/index.html.twig', [
             'controller_name' => 'UserInterfaceController',
             'matieres' => $matiereRepository->findAll(),
+            //'mesMatier'=> $user->getUser(),
         ]);
     }
 
@@ -91,9 +99,13 @@ class UserInterfaceController extends AbstractController
     /**
      * @Route ("/panier/checkout/success" , name="checkout_success")
      */
-    public function succes()
+    public function succes(panierService $panierService)
     {
-        return $this->render('user_interface/succes.html.twig');
+
+        $panierService->commender();
+        return $this->render('user_interface/succes.html.twig',[
+            'vider'=>$panierService->removeAllItem()
+        ]);
     }
 
     /**

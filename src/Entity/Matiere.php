@@ -47,10 +47,16 @@ class Matiere
      */
     private $test;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Commande::class, mappedBy="matierPos")
+     */
+    private $commandes;
+
     public function __construct()
     {
         $this->courses = new ArrayCollection();
         $this->test = new ArrayCollection();
+        $this->commandes = new ArrayCollection();
     }
 
 
@@ -163,6 +169,33 @@ class Matiere
             if ($test->getMatiere() === $this) {
                 $test->setMatiere(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commande[]
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes[] = $commande;
+            $commande->addMatierPo($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->commandes->removeElement($commande)) {
+            $commande->removeMatierPo($this);
         }
 
         return $this;

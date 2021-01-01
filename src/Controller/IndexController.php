@@ -13,12 +13,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/admin/index")
+ * @IsGranted("ROLE_ADMIN")
  */
 class IndexController extends AbstractController
 {
     /**
      * @Route("/", name="app_index")
-     * @IsGranted("ROLE_ADMIN")
      */
     public function index(MatiereRepository $matiereRepository): Response
     {
@@ -32,7 +32,7 @@ class IndexController extends AbstractController
 
     /**
      * @Route("/new", name="matiere_new", methods={"GET","POST"})
-     * @IsGranted("ROLE_USER")
+     *
      */
     public function new(Request $request): Response
     {
