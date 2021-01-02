@@ -16,11 +16,21 @@ class UserController extends AbstractController
      */
     public function index(ParticipantRepository $participantRepository): Response
     {
+        //dd($tab);
         return $this->render('user/index.html.twig', [
             'controller_name' => 'UserController',
-            'users'=> $participantRepository->findBy(
-                ['roles' => '["ROLE_ADMIN"]']
-            ),
+            'items'=> $participantRepository->findAll() ,
+        ]);
+    }
+    /**
+     * @Route("/admin", name="admin_show")
+     */
+    public function adminShow(ParticipantRepository $participantRepository): Response
+    {
+        //dd($tab);
+        return $this->render('user/admin.html.twig', [
+            'controller_name' => 'UserController',
+            'items'=> $participantRepository->findAll() ,
         ]);
     }
 }
