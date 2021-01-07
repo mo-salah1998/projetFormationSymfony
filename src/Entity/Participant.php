@@ -56,7 +56,7 @@ class Participant implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity=Commande::class, mappedBy="user")
      */
-    private $user;
+    public $user;
 
     public function __construct()
     {

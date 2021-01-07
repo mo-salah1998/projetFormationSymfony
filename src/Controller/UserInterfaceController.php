@@ -27,10 +27,18 @@ class UserInterfaceController extends AbstractController
     /**
      * @Route("/interface", name="interface")
      */
-    public function index(MatiereRepository $matiereRepository,ParticipantRepository $participantRepository,Session $session): Response
+    public function index(MatiereRepository $matiereRepository,ParticipantRepository $participantRepository,Session $session,CommandeRepository $commandeRepository) :Response
     {
-        $user = $participantRepository->findOneByEmail($session->get('app_login_from_last_email'));
-       // dd($user->getUser());
+        $users = $participantRepository->findOneByEmail($session->get('app_login_from_last_email'));
+        //$commandeRepository->findBy($users);
+        //dd($commandeRepository->findByUser($users));
+        $comandes = $commandeRepository->findByUser($users);
+        //dd($comandes);
+        foreach ($comandes as $comande ){
+          //  dd($comande->getMatierPos());
+            //TODO
+        }
+
         return $this->render('user_interface/index.html.twig', [
             'controller_name' => 'UserInterfaceController',
             'matieres' => $matiereRepository->findAll(),

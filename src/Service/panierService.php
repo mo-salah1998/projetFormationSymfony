@@ -94,7 +94,7 @@ class panierService extends AbstractController
                 $commande->addMatierPo($this->matiereRepository->find($id));
             }
         }
-       // $user->addUser($commande);
+        $user->addUser($commande);
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($commande);
         $entityManager->flush();
